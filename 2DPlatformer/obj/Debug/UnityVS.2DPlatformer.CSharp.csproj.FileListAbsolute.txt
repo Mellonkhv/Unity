@@ -1,0 +1,12 @@
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\UnityEditor.dll
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\UnityEngine.dll
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\Assembly-CSharp-firstpass.pdb
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\UnityEngine.xml
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\UnityEditor.xml
+C:\GitWIP\Unity\2DPlatformer\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+C:\GitWIP\Unity\2DPlatformer\obj\Debug\UnityVS.2DPlatformer.CSharp.csprojResolveAssemblyReference.cache
+C:\GitWIP\Unity\2DPlatformer\obj\Debug\Assembly-CSharp.dll
+C:\GitWIP\Unity\2DPlatformer\obj\Debug\Assembly-CSharp.pdb
