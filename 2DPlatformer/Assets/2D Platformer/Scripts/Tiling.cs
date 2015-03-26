@@ -42,7 +42,7 @@ public class Tiling : MonoBehaviour
 
             //вычислить позицию Х 
             float edgeVisiblePositionRight = (myTransform.position.x + spriteWidth/2) - camHorisontalExtend;
-            float adgeVisiblePositionLeft = (myTransform.position.x - spriteWidth/2) + camHorisontalExtend;
+            float edgeVisiblePositionLeft = (myTransform.position.x - spriteWidth/2) + camHorisontalExtend;
 
             // Проверяем, если мы можем видеть край элемента тогда мы вызываем MakeNewBuddy() если это возможно
             if (cam.transform.position.x >= edgeVisiblePositionRight - offsetX && hasARightBuddy == false)
@@ -50,7 +50,7 @@ public class Tiling : MonoBehaviour
                 MakeNewBuddy(1);
                 hasARightBuddy = true;
             }
-            else if (cam.transform.position.x <= edgeVisiblePositionRight + offsetX && hasALeftBuddy == false)
+            else if (cam.transform.position.x <= edgeVisiblePositionLeft + offsetX && hasALeftBuddy == false)
             {
                 MakeNewBuddy(-1);
                 hasALeftBuddy = true;
