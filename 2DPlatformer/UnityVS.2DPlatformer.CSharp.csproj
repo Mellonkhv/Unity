@@ -61,8 +61,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\2D Platformer\Scripts\ArmRotation.cs" />
+    <Compile Include="Assets\2D Platformer\Scripts\GameMaster.cs" />
     <Compile Include="Assets\2D Platformer\Scripts\MoveTrail.cs" />
     <Compile Include="Assets\2D Platformer\Scripts\Parallaxing.cs" />
+    <Compile Include="Assets\2D Platformer\Scripts\Player.cs" />
     <Compile Include="Assets\2D Platformer\Scripts\Tiling.cs" />
     <Compile Include="Assets\2D Platformer\Scripts\Weapon.cs" />
   </ItemGroup>
