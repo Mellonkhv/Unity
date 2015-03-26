@@ -9,6 +9,6 @@ public class MoveTrail : MonoBehaviour {
 	void Update () 
     {
         transform.Translate(Vector3.right * Time.deltaTime * moveSpeed);
-        Destroy(gameObject, 0.2f);
+        Destroy(gameObject, 1);
 	}
 }
