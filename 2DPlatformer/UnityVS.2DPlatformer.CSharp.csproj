@@ -52,6 +52,9 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Pathfinding.Ionic.Zip.Reduced">
       <HintPath>Assets\Plugins\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
@@ -68,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Assets\2D Platformer\Scripts\ArmRotation.cs" />
     <Compile Include="Assets\2D Platformer\Scripts\Camera2DFollow.cs" />
+    <Compile Include="Assets\2D Platformer\Scripts\EnemyAI.cs" />
     <Compile Include="Assets\2D Platformer\Scripts\GameMaster.cs" />
     <Compile Include="Assets\2D Platformer\Scripts\MoveTrail.cs" />
     <Compile Include="Assets\2D Platformer\Scripts\Parallaxing.cs" />
