@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using Pathfinding;
 
 [RequireComponent (typeof (Rigidbody2D))]
@@ -44,7 +45,22 @@ public class EnemyAI : MonoBehaviour {
         // Начать новый путь к позиции цели, вернуть результат в метод OnPathComplete
         seeker.StartPath(transform.position, target.position, OnPathComplete);
 
-        // Написать больше
+        StartCoroutine(UpdatePath());
+    }
+
+    IEnumerator UpdatePath()
+    {
+        if(target == null)
+        {
+            //TODO: Написать поиск Игрока здесь
+            return false;
+        }
+
+        // Начать новый путь к позиции цели, вернуть результат в метод OnPathComplete
+        seeker.StartPath(transform.position, target.position, OnPathComplete);
+
+        yield return new WaitForSeconds(1f / updateRate);
+        StartCoroutine(UpdatePath());
     }
 
     public void OnPathComplete(Path p)
@@ -54,6 +70,45 @@ public class EnemyAI : MonoBehaviour {
         {
             path = p;
             currentWaypoint = 0;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (target == null)
+        {
+            //TODO: Написать поиск Игрока здесь
+            return;
+        }
+
+        // TODO: Всегда смотрю на игрока?
+
+        if (path == null) return;
+
+        if (currentWaypoint >= path.vectorPath.Count)
+        {
+            if (pathIsEnded) return;
+
+            Debug.Log("Конец пути достигнут.");
+
+            pathIsEnded = true;
+            return;
+        }
+
+        pathIsEnded = false;
+
+        // Направление к следующей точке пути
+        Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
+        dir *= speed * Time.fixedDeltaTime;
+
+        // Двигаем AI
+        rb.AddForce(dir, fMode);
+
+        float distence = Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]);
+        if (distence < nextWaypointDistance)
+        {
+            currentWaypoint++;
+            return;
         }
     }
 }
