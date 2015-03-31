@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\2D Platformer\Scripts\ArmRotation.cs" />
      <Compile Include="Assets\2D Platformer\Scripts\Camera2DFollow.cs" />
+     <Compile Include="Assets\2D Platformer\Scripts\Enemy.cs" />
      <Compile Include="Assets\2D Platformer\Scripts\EnemyAI.cs" />
      <Compile Include="Assets\2D Platformer\Scripts\GameMaster.cs" />
      <Compile Include="Assets\2D Platformer\Scripts\MoveTrail.cs" />

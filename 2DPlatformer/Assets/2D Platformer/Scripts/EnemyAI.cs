@@ -32,13 +32,19 @@ public class EnemyAI : MonoBehaviour {
     // Точка пути к которой мы движемсяв настоящий момент
     private int currentWaypoint = 0;
 
+    private bool searchingForPlayer = false;
+
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         if (target == null)
         {
-            Debug.LogError("ненайден игрок! Что!?");
+            if (!searchingForPlayer)
+            {
+                searchingForPlayer = true;
+                StartCoroutine(SearchForPlayer());
+            }
             return;
         }
 
@@ -48,11 +54,32 @@ public class EnemyAI : MonoBehaviour {
         StartCoroutine(UpdatePath());
     }
 
+    IEnumerator SearchForPlayer ()
+    {
+        GameObject sResult = GameObject.FindGameObjectWithTag("Player");
+        if (sResult == null)
+        {
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(SearchForPlayer());
+        }
+        else
+        {
+            target = sResult.transform;
+            searchingForPlayer = false;
+            StartCoroutine(UpdatePath());
+            return false;
+        }
+    }
+
     IEnumerator UpdatePath()
     {
-        if(target == null)
+        if (target == null)
         {
-            //TODO: Написать поиск Игрока здесь
+            if (!searchingForPlayer)
+            {
+                searchingForPlayer = true;
+                StartCoroutine(SearchForPlayer());
+            }
             return false;
         }
 
@@ -77,7 +104,11 @@ public class EnemyAI : MonoBehaviour {
     {
         if (target == null)
         {
-            //TODO: Написать поиск Игрока здесь
+            if (!searchingForPlayer)
+            {
+                searchingForPlayer = true;
+                StartCoroutine(SearchForPlayer());
+            }
             return;
         }
 
