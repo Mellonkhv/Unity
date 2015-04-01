@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
 
-public class BordManager : MonoBehaviour 
+public class BoardManager : MonoBehaviour 
 {
     [Serializable]
     public class Count
