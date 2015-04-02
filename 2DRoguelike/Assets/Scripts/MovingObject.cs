@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MovingObject : MonoBehaviour {
+public abstract class MovingObject : MonoBehaviour {
 
     public float moveTime = 0.1f;
     public LayerMask blockingLayer;
@@ -57,7 +57,7 @@ public class MovingObject : MonoBehaviour {
         if (hit.transform == null)
             return;
 
-        T hitComponent = hit.transform.GetComponent<T>();
+        T hitComponent = hit.transform.GetComponent <T> ();
 
         if (!canMove && hitComponent != null)
             OnCantMove(hitComponent);
@@ -65,5 +65,5 @@ public class MovingObject : MonoBehaviour {
 
 
     protected abstract void OnCantMove <T> (T component)
-        where T : Component;
+			where T : Component;
 }
