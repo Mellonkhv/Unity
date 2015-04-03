@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// abstract ключевое слово которое позволяет создавать классы и членов класса, которые являются неполными и должны быть реализованы в производном классе.
 public abstract class MovingObject : MonoBehaviour {
 
-    public float moveTime = 0.1f;
-    public LayerMask blockingLayer;
+    public float moveTime = 0.1f; // Сколько потребуется времени для движения в секундах
+    public LayerMask blockingLayer; // Слой на котором будут проверяться столкновения
 
-    private BoxCollider2D boxCollider;
+    private BoxCollider2D boxCollider; 
     private Rigidbody2D rb2D;
-    private float inverseMoveTime;
+    private float inverseMoveTime; // Используется для более эффективного перемещения
 
-	// Use this for initialization
+	//Protected виртуальные функции могут быть переопределены с помощью наследования классов.
 	protected virtual void Start () 
     {
-        boxCollider = GetComponent<BoxCollider2D>();
-        rb2D = GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<BoxCollider2D>(); // Получить ссылку на компонент
+        rb2D = GetComponent<Rigidbody2D>(); // Получить ссылку на компонент
         inverseMoveTime = 1f / moveTime;
 	}
 
