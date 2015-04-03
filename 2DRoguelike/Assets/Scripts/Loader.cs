@@ -8,8 +8,9 @@ public class Loader : MonoBehaviour {
 	// Use this for initialization
 	void Awake () 
     {
+        // Проверка назначен ли GameManager на статическую переменную или нет
         if (GameManager.instance == null)
-            Instantiate(gameManager);
+            Instantiate(gameManager); // Создание gameManager из префаба
 	}
 	
 	// Update is called once per frame
