@@ -16,15 +16,22 @@ public abstract class MovingObject : MonoBehaviour {
     {
         boxCollider = GetComponent<BoxCollider2D>(); // Получить ссылку на компонент
         rb2D = GetComponent<Rigidbody2D>(); // Получить ссылку на компонент
+        // Сохраняя обратное время перемещения мы можем использовать его путем умножения вместо деления, это более эффективно.
         inverseMoveTime = 1f / moveTime;
 	}
 
+    // Move возвращает истину, если он может двигаться и ложно, если нет.
+    // Move принимает параметры для направления X, направления Y и RaycastHit2D для проверки столкновения
     protected bool Move (int xDir, int yDir, out RaycastHit2D hit)
     {
+        // Сохраняем стартовое положение для движения объекта от текужего положения
         Vector2 start = transform.position;
-        Vector2 end = start + new Vector2(xDir, yDir);
+        // Рассчитать конечную позицию, основанную на параметрах направления, которые передаются при вызове "Move".
+        Vector2 end = start + new Vector2(xDir, yDir); 
 
+        // Отключить BoxCollider для того чтоб linecast не поймал собственный колайдер
         boxCollider.enabled = false;
+        // Проводим линию от стартовой к конечной позиции для проверки столкновения на blockingLayer
         hit = Physics2D.Linecast(start, end, blockingLayer);
         boxCollider.enabled = true;
 
