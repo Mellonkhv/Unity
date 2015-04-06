@@ -33,45 +33,64 @@ public abstract class MovingObject : MonoBehaviour {
         boxCollider.enabled = false;
         // Проводим линию от стартовой к конечной позиции для проверки столкновения на blockingLayer
         hit = Physics2D.Linecast(start, end, blockingLayer);
+        // Повторное включение BoxCollider после linecast
         boxCollider.enabled = true;
 
+        // Проверяй если что-то ударил
         if (hit.transform == null)
         {
+            // Если нет столкновения запустить SmoothMovement для перехода в позицию end 
             StartCoroutine(SmoothMovement(end));
+            // Возвращаем истину
             return true;
         }
+        // Если во что-то упёрлись возвращаем лож, движение не удалось
         return false;
     }
 
+    // Метод для перемещения объекта от текущёй точки в конечную
     protected IEnumerator SmoothMovement(Vector3 end)
     {
+        // Вычислить оставшееся расстояние для перемещения на основе квадратный величины разности между текущей позицией и позицией end.
         float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
 
+        // Пока расстояние больше чем почти 0
         while (sqrRemainingDistance > float.Epsilon)
         {
+            //  Найти новую позицию пропорционально ближе к концу, на основе moveTime
             Vector3 newPosition = Vector3.MoveTowards(rb2D.position, end, inverseMoveTime * Time.deltaTime);
+            // Вызов MovePosition в прилагаемом Rigidbody2D и перемещение его в вычесленную позицию
             rb2D.MovePosition(newPosition);
+            // Пересчитываем оставшееся растояние после перемещения
             sqrRemainingDistance = (transform.position - end).sqrMagnitude;
+            // Возвращаемся в цкил пока sqrRemainingDistance не станет достаточно близко к нулю
             yield return null;
         }
     }
 
+    // AttemptMove берёт сгенерированный параметр T, для указания типа компонента мы ожидаем от наших объектов, если он заблокирован (Игрок для врагов, стены для игрока).
     protected virtual void AttemptMove<T>(int xDir, int yDir)
         where T : Component
     {
+        // Hit будт хранить любые столкновения при вызове функции Move
         RaycastHit2D hit;
+        // Устанавливает canMove в истину, если операция прошла успешно и ложно если иначе 
         bool canMove = Move(xDir, yDir, out hit);
 
+        // Проверяем небыло ли столкновения
         if (hit.transform == null)
             return;
 
+        // Получаем ссылку компонента с которым произошло столкновение
         T hitComponent = hit.transform.GetComponent <T> ();
 
+        // Если canMove равен false и hitComponent не равен null значит объект неможет двигаться и столкнулся с чем-то с чем он может взаимодействовать
         if (!canMove && hitComponent != null)
+            
             OnCantMove(hitComponent);
     }
 
-
+    // Абстратный метод должен быть дописан при наследовании классов
     protected abstract void OnCantMove <T> (T component)
 			where T : Component;
 }
