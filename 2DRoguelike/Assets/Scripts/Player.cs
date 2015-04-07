@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Player : MovingObject {
 
-    public int wallDamage = 1;
-    public int pointsPerFood = 10;
-    public int pointsPerSoda = 20;
-    public float restartLevelDelay = 1f;
+    public int wallDamage = 1;              // Сколько повреждений наносится стене
+    public int pointsPerFood = 10;          // Сколько очков еды получает от еды
+    public int pointsPerSoda = 20;          // Сколько очков еды получает от соды
+    public float restartLevelDelay = 1f;    // Задержка в секундах перед перезагрузкой уровня
 
-    private Animator animator;
-    private int food;
+    private Animator animator;              // Ссылка на компонент Аниматор для игрока
+    private int food;                       // Количество 
 
 
 	// Use this for initialization
