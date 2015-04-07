@@ -28,7 +28,7 @@ public abstract class MovingObject : MonoBehaviour {
         Vector2 start = transform.position;
         // Рассчитать конечную позицию, основанную на параметрах направления, которые передаются при вызове "Move".
         Vector2 end = start + new Vector2(xDir, yDir); 
-
+        
         // Отключить BoxCollider для того чтоб linecast не поймал собственный колайдер
         boxCollider.enabled = false;
         // Проводим линию от стартовой к конечной позиции для проверки столкновения на blockingLayer
