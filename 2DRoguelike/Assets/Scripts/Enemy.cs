@@ -3,11 +3,13 @@ using System.Collections;
 
 public class Enemy : MovingObject{
 
-    public int playerDamege;    // Количество очков еды выпадающих из игрока при атаке
+    public int playerDamege;        // Количество очков еды выпадающих из игрока при атаке
+    public AudioClip attackSound1;	// Первый звуковой эффект при атаке игрока
+    public AudioClip attackSound2;	// Второй звуковой эффект при атаке игрока
 
-    private Animator animator;  // Переменная типа Аниматор сохраняет ссылку на компонент Аниматора
-    private Transform target;   // координаты цели перемешения каждого хода
-    private bool skipMove;      // определяет следует ли врагу пропустить ход или двигаться в этот ход
+    private Animator animator;      // Переменная типа Аниматор сохраняет ссылку на компонент Аниматора
+    private Transform target;       // координаты цели перемешения каждого хода
+    private bool skipMove;          // определяет следует ли врагу пропустить ход или двигаться в этот ход
 
 	// Start перекрывает метод базового класса
 	protected override void Start () 
@@ -70,6 +72,8 @@ public class Enemy : MovingObject{
 
         // Переключаем анимацию в атаку
         animator.SetTrigger("enemyAttack");
+        // Воспроизводим один из двух звуков атаки
+        SoundManager.instance.RandomizeSfx(attackSound1, attackSound2);
 
         // отнимаем у игрока очки еды (здоровье)
         hitPlayer.LooseFood(playerDamege);

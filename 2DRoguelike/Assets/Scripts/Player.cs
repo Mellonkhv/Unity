@@ -9,6 +9,13 @@ public class Player : MovingObject {
     public int pointsPerSoda = 20;          // Сколько очков еды получает от соды
     public float restartLevelDelay = 1f;    // Задержка в секундах перед перезагрузкой уровня
     public Text foodText;                   // Индикатор количества еды
+    public AudioClip moveSound1;			// 1 из 2 звуковых отрезков проигрываемых при ходьбе.
+    public AudioClip moveSound2;			// 2 из 2 звуковых отрезков проигрываемых при ходьбе.
+    public AudioClip eatSound1;				// 1 из 2 звуковых отрезков проигрываемых при потреблении еды.
+    public AudioClip eatSound2;				// 2 из 2 звуковых отрезков проигрываемых при потреблении еды.
+    public AudioClip drinkSound1;			// 1 из 2 звуковых отрезков проигрываемых при потреблении содовой.
+    public AudioClip drinkSound2;			// 2 из 2 звуковых отрезков проигрываемых при потреблении содовой.
+    public AudioClip gameOverSound;			// Посмертныя мелодия.
 
     private Animator animator;              // Ссылка на компонент Аниматор для игрока
     private int food;                       // Количество 
@@ -66,8 +73,14 @@ public class Player : MovingObject {
         food--;
         // Вызываем AttemptMove базового класса
         base.AttemptMove<T>(xDir, yDir);
-        // Hit позволяет ссылаться на результат Linecast сделано в движении.
+        // Hit позволяет ссылаться на результат Linecast сделаный в движении.
         RaycastHit2D hit;
+        // Если игрок двигается по пустому пространству (нивочто не упёрся)
+        if(Move (xDir, yDir, out hit))
+        {
+            // Воспроизводится один из двух звуков хотьбы
+            SoundManager.instance.RandomizeSfx(moveSound1, moveSound2);
+        }
 
         // Поскольку игрок перемещается и теряет очки еды, проверьте, жив ли он.
         CheckIfGameOver();
@@ -94,6 +107,8 @@ public class Player : MovingObject {
             food += pointsPerFood;
             // Обновляем информацию о еде
             foodText.text = "+" + pointsPerFood + " Еда: " + food;
+            // Воспроизводится один из двух звуков съедания
+            SoundManager.instance.RandomizeSfx(eatSound1, eatSound2);
             // Удаляем съеденый объект
             other.gameObject.SetActive(false);
         }
@@ -104,6 +119,8 @@ public class Player : MovingObject {
             food += pointsPerSoda;
             // Обновляем информацию о еде
             foodText.text = "+" + pointsPerSoda + " Еда: " + food;
+            // Воспроизводится один из двух звуков выпивания
+            SoundManager.instance.RandomizeSfx(drinkSound1, drinkSound2);
             // Удаляем съеденый объект 
             other.gameObject.SetActive(false);
         }
@@ -145,7 +162,13 @@ public class Player : MovingObject {
     {
         // если очков еди меньше или равно нулю
         if (food <= 0)
+        {
+            // Воспроизводится мелодия окочуривания
+            SoundManager.instance.PlaySingle(gameOverSound);
+            // Выключается музыка
+            SoundManager.instance.musicSource.Stop();
             // Объевляем конец игры
             GameManager.instance.GameOver();
+        }
     }
 }
