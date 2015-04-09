@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+    public float levelStartDelay = 2f;                  // Задержка перед запуском уровня
     public float turnDelay = .1f;                       // Задержка между каждым ходоом игрока
     public static GameManager instance = null;          // Статический экземпляр GameManager, что позволят ему быть доступным любому другому сценарию
     public BoardManager boardScript;                    // Сохраняем ссылку на класс Игровой доски которая создаст нам уровень
@@ -11,9 +13,12 @@ public class GameManager : MonoBehaviour {
     [HideInInspector] public bool playerTurn = true;    // Логическая проверка, если игрок ходит, скрытый от инспектора, но публичный
 
 
+    private Text levelText;                             // Текст отображает номер уровня
+    private GameObject levelImage;                     // Ширма для того чтобы спрятать пройденый и только что сгенерированный уговень и вывести информацию
     private int level = 1;                              // Номер текущего уровеня используется в игре как "день 1"
     private List<Enemy> enemies;                        // Список всех вражеских едениц, использующих команды движения
     private bool enemiesMoving;                         // Логическая проверка если враги в движении
+    private bool doingSetup = true;                     // используется в том случаи, если строится уровень, для запрещения игроку перемещаться
 
 	// Вызывается первой до функции Start
 	void Awake () 
@@ -37,18 +42,53 @@ public class GameManager : MonoBehaviour {
         InitGame();
 	}
 
+    // Вызывается в то время когда уровень загружается
+    private void OnLevelWasLoaded(int index)
+    {
+        // Увеличиваем счётчик уровня
+        level++;
+        // Инициализируем новый уровень
+        InitGame();
+    }
+
     // Инициализация игры для каждого уровня
     void InitGame()
     {
+        // Запрещаем игроку двигаться
+        doingSetup = true;
+        // Получаем ссылку на LevelImage
+        levelImage = GameObject.Find("LevelImage");
+        // Получаем ссылку на LevelText
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        // Выводим информацию о дне выживания в стране Зомбидии
+        levelText.text = "День " + level;
+        // Скрыть игрока и уровень ширмой
+        levelImage.SetActive(true);
+        // Убираем ширму xthtp 2 ctreyls
+        Invoke("HideLevelImage", levelStartDelay);
+
         // Очищаем список врагов
         enemies.Clear();
         // Генерируем уровень передавая его номер
         boardScript.SetupScene(level);
     }
+
+    // Спрятать ширму используемую между уровнями
+    void HideLevelImage()
+    {
+        // Скрываем ширму
+        levelImage.SetActive(false);
+        // разрешаем игроку двигаться
+        doingSetup = false;
+    }
 	
     // Вызывается когда у игрока заканчиваются очки еды.
     public void GameOver()
     {
+        // Говорим сколько выживал игрок
+        levelText.text = "После " + level + " дней, ты окочурился.";
+        // Активируем ширму
+        levelImage.SetActive(true);
         // Выключает этот GameManager
         enabled = false;
     }
@@ -57,7 +97,7 @@ public class GameManager : MonoBehaviour {
 	void Update () 
     {
         // Проверяем, что статус playersTurn или enemiesMoving или doingSetup в настоящее время не верны
-        if (playerTurn || enemiesMoving)
+        if (playerTurn || enemiesMoving || doingSetup)
             // Если где-то совпало повторить и не запускать MovingEnemy
             return;
         // Начало движения врагов

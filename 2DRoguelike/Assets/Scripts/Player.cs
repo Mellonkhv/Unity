@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Player : MovingObject {
 
@@ -7,6 +8,7 @@ public class Player : MovingObject {
     public int pointsPerFood = 10;          // Сколько очков еды получает от еды
     public int pointsPerSoda = 20;          // Сколько очков еды получает от соды
     public float restartLevelDelay = 1f;    // Задержка в секундах перед перезагрузкой уровня
+    public Text foodText;                   // Индикатор количества еды
 
     private Animator animator;              // Ссылка на компонент Аниматор для игрока
     private int food;                       // Количество 
@@ -19,6 +21,9 @@ public class Player : MovingObject {
 
         // Получить текущую количество очков пища хранится в GameManager.instance между уровнями.
         food = GameManager.instance.playerFoodPoins;
+        // Выводим информацию о еде
+        foodText.text = "Еда: " + food;
+
         // Вызвать метод Start из базового класса
         base.Start();
 	}
@@ -55,6 +60,8 @@ public class Player : MovingObject {
     // Заменяем базовый класс AttemptMove
     protected override void AttemptMove <T> (int xDir, int yDir)
     {
+        // Обновляем информацию о еде
+        foodText.text = "Еда: " + food;
         // Каждый ход отимаем еду
         food--;
         // Вызываем AttemptMove базового класса
@@ -85,6 +92,8 @@ public class Player : MovingObject {
         {
             // Добавляем очки еды игроку
             food += pointsPerFood;
+            // Обновляем информацию о еде
+            foodText.text = "+" + pointsPerFood + " Еда: " + food;
             // Удаляем съеденый объект
             other.gameObject.SetActive(false);
         }
@@ -93,6 +102,8 @@ public class Player : MovingObject {
         {
             // добавляем очки еды
             food += pointsPerSoda;
+            // Обновляем информацию о еде
+            foodText.text = "+" + pointsPerSoda + " Еда: " + food;
             // Удаляем съеденый объект 
             other.gameObject.SetActive(false);
         }
@@ -123,6 +134,8 @@ public class Player : MovingObject {
         animator.SetTrigger("playerHit");
         // отнимаем очки еды
         food -= loss;
+        // Обновляем информацию о еде
+        foodText.text = "-" + loss + " Еда: " + food;
         // проверяем живой ли игрок
         CheckIfGameOver();
     }
