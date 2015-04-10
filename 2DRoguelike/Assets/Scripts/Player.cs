@@ -19,6 +19,7 @@ public class Player : MovingObject {
 
     private Animator animator;              // Ссылка на компонент Аниматор для игрока
     private int food;                       // Количество 
+    private Vector2 touchOrigin = -Vector2.one; // Используется для хранения места сенсорного экрана происхождения мобильных элементов управления.
 
 
     // Start перекрывает метод базового класса
@@ -51,14 +52,51 @@ public class Player : MovingObject {
         int horizontal = 0; // Использовать для горизонтального перемещения
         int vertical = 0;   // Использовать для вертикального перемещения
 
-        // Получить информацию от менеджера ввода, вокруг него на целое и в магазине в горизонтальной установить по оси Х направлению движения
-        horizontal = (int)Input.GetAxisRaw("Horizontal");
-        // Получить информацию от менеджера ввода, вокруг него на целое и в магазине в вертикальной установить по оси Y направлению движения
-        vertical = (int)Input.GetAxisRaw("Vertical");
+        #if UNITY_STANDALONE || UNITY_WEBPLAYER
 
-        // Если двигаемся горизонтально
-        if (horizontal != 0)
-            vertical = 0; // по вертикали запрещаем движение
+            // Получить информацию от менеджера ввода, вокруг него на целое и в магазине в горизонтальной установить по оси Х направлению движения
+            horizontal = (int)Input.GetAxisRaw("Horizontal");
+            // Получить информацию от менеджера ввода, вокруг него на целое и в магазине в вертикальной установить по оси Y направлению движения
+            vertical = (int)Input.GetAxisRaw("Vertical");
+
+            // Если двигаемся горизонтально
+            if (horizontal != 0)
+                vertical = 0; // по вертикали запрещаем движение
+        #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+            // Проверяем, если параметр зарегистрировал более нуля касаний
+            if (Input.touchCount > 0)
+            {
+                // Сохраняем что первое касание обноружено
+                Touch myTouch = Input.touches[0];
+
+                // Проверяем, если фаза косания равна Начал
+                if (myTouch.phase == TouchPhase.Began)
+                {
+                    // тогда ставим touchOrigin на место касания
+                    touchOrigin = myTouch.position;
+                }
+                // Если фаза касания не Начал, а вместо этого равен Закончил и Х touchOrigin больше или равно нулю:
+                else if (myTouch.phase == TouchPhase.Ended && touchOrigin.x >= 0)
+                {
+                    // установить touchEnd равным положению этого косания
+                    Vector2 touchEnd = myTouch.position;
+                    // Вычисление разницы между началом и концом нажатия по оси X.
+                    float x = touchEnd.x - touchOrigin.x;
+                    // Вычисление разницы между началом и концом нажатия по оси Y.
+                    float y = touchEnd.y - touchOrigin.y;
+                    // Установить touchOrigin.x = -1, так что наш else if оператор оцениват неверно и повторит не сразу.
+                    touchOrigin.x = -1;
+                    // Проверяем, что разница по оси Х больше, чем разница вдоль оси Y.
+                    if(Mathf.Abs(x) > Mathf.Abs(y))
+                        // Если Х больше 0 устанавливаем horizontal равным 1 иначе -1
+                        horizontal = x > 0 ? 1 : -1;
+                    else
+                        // Если Y больше 0 устанавливаем vertical равным 1 иначе -1
+                        vertical = y > 0 ? 1 : -1;
+                }
+            }
+        #endif
+
         // Если Игрок движется
         if (horizontal != 0 || vertical != 0)
             // Вызов AttemptMove с общм параметром Wall, так это то с чем игрок может взаимодействовать, если они сталкиваются друг с другом (атакуя его).
