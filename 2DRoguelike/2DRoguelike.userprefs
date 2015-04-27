@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\VeganMatch3\Assets\Scripts\BoardManager.cs">
+    <Files>
+      <File FileName="..\VeganMatch3\Assets\Scripts\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BoardManager.cs" Line="1" Column="1" />
+      <File FileName="..\VeganMatch3\Assets\Scripts\BoardManager.cs" Line="25" Column="5" />
+      <File FileName="Assets\Scripts\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Completed\Scripts\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Completed\Scripts\BoardManager.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

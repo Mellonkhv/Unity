@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 
 
     private Text levelText;                             // Текст отображает номер уровня
-    private GameObject levelImage;                     // Ширма для того чтобы спрятать пройденый и только что сгенерированный уговень и вывести информацию
+    private GameObject levelImage;                     	// Ширма для того чтобы спрятать пройденый и только что сгенерированный уговень и вывести информацию
     private int level = 1;                              // Номер текущего уровеня используется в игре как "день 1"
     private List<Enemy> enemies;                        // Список всех вражеских едениц, использующих команды движения
     private bool enemiesMoving;                         // Логическая проверка если враги в движении
