@@ -29,6 +29,8 @@ public class GameManager : MonoBehaviour
 
         // получаем ссылку на скрипт Игровой доски
 		boardScript = GetComponent<BoardManager>();
+
+        InitGame();
 	}
 
     void InitGame()

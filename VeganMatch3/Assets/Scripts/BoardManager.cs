@@ -10,6 +10,7 @@ public class BoardManager : MonoBehaviour
 	// ==== PUBLIC VARIABLES ====
 	public int colums = 8;						// Количество колонок на игровом поле
 	public int rows = 8;						// Количество рядов на игровом поле
+    public float shift = 0.01f;
     public GameObject[] tiles;                  // Массив с притками
 
 	// ==== PRIVAT VARIABLES ====
@@ -36,7 +37,7 @@ public class BoardManager : MonoBehaviour
 
 		for (int x = 0; x < colums; x++)
 		{
-			for (int y = 0; x < rows; y++)
+			for (int y = 0; y < rows; y++)
 			{
                 // Создаём объект для последующего заполнения и установки в сетку
                 GameObject toInstantiate = new GameObject();
