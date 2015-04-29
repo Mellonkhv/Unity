@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 	public BoardManager boardScript;				// Сохраняем ссылку на класс Игровой доски которая создаст нам уровень
 
 
+
 	// Use this for initialization
 	void Awake () 
 	{

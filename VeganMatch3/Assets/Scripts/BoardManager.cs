@@ -12,6 +12,8 @@ public class BoardManager : MonoBehaviour
 	public int rows = 8;						// Количество рядов на игровом поле
     public float shift = 0.01f;
     public GameObject[] tiles;                  // Массив с притками
+    public static bool _isFirstTile = true;         // Проверяет нажата ли какая либо плитка ранее
+    public static Tiles firstTile;
 
 	// ==== PRIVAT VARIABLES ====
     private Transform boardHolder; 				// Переменная для хранения ссылок на расположение объекта "Игровое поле"
