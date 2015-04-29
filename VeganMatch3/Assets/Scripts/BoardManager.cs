@@ -56,7 +56,7 @@ public class BoardManager : MonoBehaviour
 	public void SetupScene()
 	{
         BoardSetup(); // Заполняем поле плитками
-        InialiseList(); // очищаем и заполняем координационную сетку
+        //InialiseList(); // очищаем и заполняем координационную сетку
 
 	}
 }
