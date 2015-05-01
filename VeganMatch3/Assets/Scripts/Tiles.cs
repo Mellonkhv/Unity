@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tiles : MonoBehaviour 
 {
-
+    
     //private bool _isFirstTile = true;         // Проверяет нажата ли какая либо плитка ранее
 
 	// Use this for initialization

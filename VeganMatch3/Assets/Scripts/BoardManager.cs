@@ -6,14 +6,15 @@ using Random = UnityEngine.Random; // Говорим что "Random" будет 
 public class BoardManager : MonoBehaviour 
 {
 
-	//[Serializable] 								// Данный атрибут позволяет увидеть класс с подсвойствами в интерфейсе Unity (Inspector)
+	//[Serializable] 						  	  // Данный атрибут позволяет увидеть класс с подсвойствами в интерфейсе Unity (Inspector)
 	// ==== PUBLIC VARIABLES ====
 	public int colums = 8;						// Количество колонок на игровом поле
 	public int rows = 8;						// Количество рядов на игровом поле
     public float shift = 0.01f;
     public GameObject[] tiles;                  // Массив с притками
-    public static bool _isFirstTile = true;         // Проверяет нажата ли какая либо плитка ранее
+    public static bool _isFirstTile = true;     // Проверяет нажата ли какая либо плитка ранее
     public static Tiles firstTile;
+    public static GameObject select;            // Выделение
 
 	// ==== PRIVAT VARIABLES ====
     private Transform boardHolder; 				// Переменная для хранения ссылок на расположение объекта "Игровое поле"
@@ -61,4 +62,9 @@ public class BoardManager : MonoBehaviour
         //InialiseList(); // очищаем и заполняем координационную сетку
 
 	}
+
+    void Update()
+    {
+        //if()
+    }
 }
