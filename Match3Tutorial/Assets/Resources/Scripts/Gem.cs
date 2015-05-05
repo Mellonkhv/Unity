@@ -5,9 +5,14 @@ using System.Collections.Generic;
 public class Gem : MonoBehaviour 
 {
     public GameObject sphere;
+    public GameObject selector;
+
     string[] gemMats = { "Red", "Blue", "Green", "Orange", "Yellow", "Black", "Purple" };
-    public List<Gem> Neighbors = new List<Gem>();
     string color = "";
+
+    public List<Gem> Neighbors = new List<Gem>();
+    
+    public bool isSelected = false;
 
 	// Use this for initialization
 	void Start () 
@@ -19,6 +24,12 @@ public class Gem : MonoBehaviour
 	void Update () 
     {
 
+    }
+
+    public void ToggleSelector()
+    {
+        isSelected = !isSelected;
+        selector.SetActive(isSelected);
     }
 
     public void CreateGem()
@@ -41,6 +52,6 @@ public class Gem : MonoBehaviour
 
     void OnMouseDown()
     {
-        print("Bip");
+        ToggleSelector();
     }
 }
