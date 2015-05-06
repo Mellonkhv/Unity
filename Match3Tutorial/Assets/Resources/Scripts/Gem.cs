@@ -8,11 +8,28 @@ public class Gem : MonoBehaviour
     public GameObject selector;
 
     string[] gemMats = { "Red", "Blue", "Green", "Orange", "Yellow", "Black", "Purple" };
-    string color = "";
+    public string color = "";
 
     public List<Gem> Neighbors = new List<Gem>();
     
     public bool isSelected = false;
+    public bool isMatched = false;
+
+    public int XCoord
+    {
+        get
+        {
+            return Mathf.RoundToInt(transform.localPosition.x);
+        }
+    }
+
+    public int YCoord
+    {
+        get
+        {
+            return Mathf.RoundToInt(transform.localPosition.y);
+        }
+    }
 
 	// Use this for initialization
 	void Start () 

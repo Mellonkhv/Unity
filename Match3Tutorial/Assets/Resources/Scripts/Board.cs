@@ -16,6 +16,8 @@ public class Board : MonoBehaviour
     public Gem gem1, gem2;
     public float startTime;
     public float SwapRate = 2;
+    public int AmountToMatch = 3;
+    public bool isMatched = false;
 
 	// Use this for initialization
 	void Start () 
@@ -51,9 +53,77 @@ public class Board : MonoBehaviour
                 TogglePhysics(false);
 
                 lastGem = null;
+                CheckMatch();
             }
         }
 	}
+
+    public void CheckMatch()
+    {
+        List<Gem> gem1List = new List<Gem>();
+        List<Gem> gem2List = new List<Gem>();
+        ConstructMatchList(gem1.color, gem1, gem1.XCoord, gem1.YCoord, ref gem1List);
+        FixMatchList(gem1, gem1List);
+        ConstructMatchList(gem2.color, gem2, gem2.XCoord, gem2.YCoord, ref gem1List);
+        FixMatchList(gem2, gem2List);
+        
+    }
+
+    public void ConstructMatchList(string color, Gem gem, int XCoord, int YCoord, ref List<Gem>MatchList)
+    {
+        if (gem == null)
+            return;
+        else if (gem.color != color)
+            return;
+        else if (MatchList.Contains(gem))
+            return;
+        else
+        {
+            MatchList.Add(gem);
+            if (XCoord == gem.XCoord || YCoord == gem.YCoord)
+            {
+                foreach (Gem g in gem.Neighbors)
+                {
+                    ConstructMatchList(color, g, XCoord, YCoord, ref MatchList);
+                }
+            }
+        }
+    }
+
+    public void FixMatchList(Gem gem, List<Gem>ListToFix)
+    {
+        List<Gem> rows = new List<Gem>();
+        List<Gem> collumns = new List<Gem>();
+
+        for(int i = 0; i < ListToFix.Count; i++)
+        {
+            if (gem.XCoord == ListToFix[i].XCoord)
+            {
+                rows.Add(ListToFix[i]);
+            }
+            if(gem.YCoord == ListToFix[i].YCoord)
+            {
+                collumns.Add(ListToFix[i]);
+            }
+        }
+
+        if(rows.Count >= AmountToMatch)
+        {
+            isMatched = true;
+            for(int i = 0; i < rows.Count; i++)
+            {
+                rows[i].isMatched = true;
+            }
+        }
+        if (collumns.Count >= AmountToMatch)
+        {
+            isMatched = true;
+            for (int i = 0; i < collumns.Count; i++)
+            {
+                collumns[i].isMatched = true;
+            }
+        }
+    }
 
     public void MoveGem(Gem gemToMove, Vector3 toPos, Vector3 fromPos)
     {
