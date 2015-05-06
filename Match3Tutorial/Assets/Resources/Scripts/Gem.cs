@@ -45,6 +45,15 @@ public class Gem : MonoBehaviour
             Neighbors.Add(g);
     }
 
+    public bool IsNeighborWith(Gem g)
+    {
+        if(Neighbors.Contains(g))
+        {
+            return true;
+        }
+        return false;
+    }
+
     public void RemoveNeighbor(Gem g)
     {
         Neighbors.Remove(g);
@@ -52,6 +61,10 @@ public class Gem : MonoBehaviour
 
     void OnMouseDown()
     {
-        ToggleSelector();
+        if (!GameObject.Find("Board").GetComponent<Board>().isSwappin)
+        {
+            ToggleSelector();
+            GameObject.Find("Board").GetComponent<Board>().SwapGems(this);
+        }
     }
 }
