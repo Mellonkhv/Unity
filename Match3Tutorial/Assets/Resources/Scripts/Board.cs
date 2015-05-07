@@ -37,7 +37,23 @@ public class Board : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-	    if (isSwappin)
+        if(isMatched)
+        {
+            for (int i = 0; i < gems.Count; i++ )
+            {
+                if(gems[i].isMatched)
+                {
+                    gems[i].CreateGem();
+                    gems[i].transform.position = new Vector3(
+                        gems[i].transform.position.x,
+                        gems[i].transform.position.y + 6,
+                        gems[i].transform.position.z);
+                }
+            }
+
+            isMatched = false;
+        }
+	    else if (isSwappin)
         {
             MoveGem(gem1, gem1End, gem1Start);
             MoveNegGem(gem2, gem2End, gem2Start);
