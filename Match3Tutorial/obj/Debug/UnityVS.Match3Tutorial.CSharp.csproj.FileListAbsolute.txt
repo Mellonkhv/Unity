@@ -1,0 +1,13 @@
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\UnityEditor.dll
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\UnityEngine.dll
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\UnityEngine.xml
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\UnityEditor.xml
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+D:\GitWIP\Unity\Match3Tutorial\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
+D:\GitWIP\Unity\Match3Tutorial\obj\Debug\UnityVS.Match3Tutorial.CSharp.csprojResolveAssemblyReference.cache
+D:\GitWIP\Unity\Match3Tutorial\obj\Debug\Assembly-CSharp.dll
+D:\GitWIP\Unity\Match3Tutorial\obj\Debug\Assembly-CSharp.pdb
