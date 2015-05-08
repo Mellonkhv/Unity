@@ -13,6 +13,7 @@ public class Board : MonoBehaviour
     public Gem lastGem;
     public Vector3 gem1Start, gem1End, gem2Start, gem2End;
     public bool isSwappin = false;
+    public bool swapBack = false;
     public Gem gem1, gem2;
     public float startTime;
     public float SwapRate = 2;
@@ -62,14 +63,22 @@ public class Board : MonoBehaviour
                 gem1.transform.position = gem1End;
                 gem2.transform.position = gem2End;
 
-                gem1.ToggleSelector();
-                gem2.ToggleSelector();
-
+                //gem1.ToggleSelector();
+                //gem2.ToggleSelector();
+                lastGem = null;
                 isSwappin = false;
                 TogglePhysics(false);
 
-                lastGem = null;
-                CheckMatch();
+                if (!swapBack)
+                {
+                    gem1.ToggleSelector();
+                    gem2.ToggleSelector();
+                    CheckMatch();
+                }
+                else
+                    swapBack = false;
+
+                //CheckMatch();
             }
         }
         else if (!DetermineBoardState())
@@ -106,7 +115,25 @@ public class Board : MonoBehaviour
         FixMatchList(gem1, gem1List);
         ConstructMatchList(gem2.color, gem2, gem2.XCoord, gem2.YCoord, ref gem1List);
         FixMatchList(gem2, gem2List);
-        
+
+        if(!isMatched)
+        {
+            swapBack = true;
+            ResetGems();
+        }
+    }
+
+    public void ResetGems()
+    {
+        gem1Start = gem1.transform.position;
+        gem1End = gem2.transform.position;
+        gem2Start = gem2.transform.position;
+        gem2End = gem1.transform.position;
+
+        startTime = Time.time;
+        TogglePhysics(true);
+
+        isSwappin = true;
     }
 
     public void CheckForNearbyMatches(Gem g)

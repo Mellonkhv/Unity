@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 public class Gem : MonoBehaviour 
 {
+    public GameObject gemHolder;
     public GameObject sphere;
     public GameObject selector;
 
-    string[] gemMats = { "Red", "Blue", "Green", "Orange", "Yellow", "Black", "Purple" };
+    string[] gemMats = { "Blue", "Green", "Grey", "Purple","Red", "Yellow"};
     public string color = "";
 
     public List<Gem> Neighbors = new List<Gem>();
@@ -46,14 +47,17 @@ public class Gem : MonoBehaviour
     public void ToggleSelector()
     {
         isSelected = !isSelected;
-        selector.SetActive(isSelected);
+        sphere.transform.FindChild("Selector").gameObject.SetActive(isSelected);
     }
 
     public void CreateGem()
     {
+        Destroy(sphere);
         color = gemMats[Random.Range(0, gemMats.Length)];
-        Material m = Resources.Load("Materials/" + color) as Material;
-        sphere.GetComponent<Renderer>().material = m;
+        GameObject gemPrefab = Resources.Load("Prefabs/" + color) as GameObject;
+        sphere = (GameObject)Instantiate(gemPrefab, Vector3.zero, Quaternion.identity);
+        sphere.transform.parent = gemHolder.transform;
+        sphere.transform.localPosition = Vector3.zero;
         isMatched = false;
     }
 
