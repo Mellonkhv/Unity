@@ -88,7 +88,16 @@ public class Board : MonoBehaviour
             {
                 CheckForNearbyMatches(gems[i]);
             }
+            if (!DoesBoardContainMatch())
+            {
+                isMatched = true;
+                for(int i = 0; i < gems.Count; i++)
+                {
+                    gems[i].isMatched = true;
+                }
+            }
         }
+        
 	}
 
     public bool DetermineBoardState()
@@ -164,6 +173,86 @@ public class Board : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool DoesBoardContainMatch()
+    {
+        TogglePhysics(false);
+        for (int i = 0; i < gems.Count; i++)
+        {
+            for (int j = 0; j < gems.Count; j++)
+            {
+                if(gems[i].IsNeighborWith(gems[j]))
+                {
+                    Gem g = gems[i];
+                    Gem f = gems[j];
+                    Vector3 gTemp = g.transform.position;
+                    Vector3 fTemp = f.transform.position;
+                    List<Gem> tempNeighbors = new List<Gem>(g.Neighbors);
+                    g.transform.position = fTemp;
+                    f.transform.position = gTemp;
+                    g.Neighbors = f.Neighbors;
+                    f.Neighbors = tempNeighbors;
+                    List<Gem> testListG = new List<Gem>();
+                    ConstructMatchList(g.color, g, g.XCoord, g.YCoord, ref testListG);
+                    if(TestMatchList(g,testListG))
+                    {
+                        g.transform.position = gTemp;
+                        f.transform.position = fTemp;
+                        g.Neighbors = tempNeighbors;
+                        f.Neighbors = g.Neighbors;
+                        TogglePhysics(true);
+                        return true;
+                    }
+                    List<Gem> testListF = new List<Gem>();
+                    ConstructMatchList(f.color, f, f.XCoord, f.YCoord, ref testListF);
+                    if(TestMatchList(f,testListF))
+                    {
+                        g.transform.position = gTemp;
+                        f.transform.position = fTemp;
+                        g.Neighbors = tempNeighbors;
+                        f.Neighbors = g.Neighbors;
+                        TogglePhysics(true);
+                        return true;
+                    }
+                    g.transform.position = gTemp;
+                    f.transform.position = fTemp;
+                    g.Neighbors = tempNeighbors;
+                    f.Neighbors = g.Neighbors;
+                    TogglePhysics(true);
+                }
+            }
+        }
+        return false;
+    }
+
+    public bool TestMatchList(Gem gem, List<Gem> ListToFix)
+    {
+        List<Gem> rows = new List<Gem>();
+        List<Gem> collumns = new List<Gem>();
+
+        for (int i = 0; i < ListToFix.Count; i++)
+        {
+            if (gem.XCoord == ListToFix[i].XCoord)
+            {
+                rows.Add(ListToFix[i]);
+            }
+            if (gem.YCoord == ListToFix[i].YCoord)
+            {
+                collumns.Add(ListToFix[i]);
+            }
+        }
+
+        if (rows.Count >= AmountToMatch)
+        {
+            return true;
+        }
+        if (collumns.Count >= AmountToMatch)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void FixMatchList(Gem gem, List<Gem>ListToFix)
