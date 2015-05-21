@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Board : MonoBehaviour 
 {
 
-    public List<GameObject> gems = new List<GameObject>();
+    public List<Gem> gems = new List<Gem>();
     public int GridWidth;
     public int GridHeight;
     public GameObject GemPrefab;
@@ -19,7 +19,7 @@ public class Board : MonoBehaviour
             {
                 GameObject g = Instantiate(GemPrefab, new Vector3(x, y, 0), Quaternion.identity) as GameObject;
                 g.transform.parent = gameObject.transform;
-                gems.Add(g);
+                gems.Add(g.GetComponent<Gem>());
             }
 
         }
