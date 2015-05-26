@@ -9,10 +9,21 @@ public class Gem : MonoBehaviour
     public GameObject Sphere;
     public GameObject Selector;
     private string[] _gemMats = {"Blue", "Green", "Grey", "Purple", "Red", "Yellow"};
-    private string _color = "";
+    public string _color = "";
     public List<Gem> Neighbors = new List<Gem>();
     public bool IsSelected = false;
-	
+    public bool isMatched = false;
+
+    public int Xcoord
+    {
+        get { return Mathf.RoundToInt(transform.localPosition.x); }
+    }
+
+    public int Ycoord
+    {
+        get { return Mathf.RoundToInt(transform.localPosition.y); }
+    }
+
     // Use this for initialization
 	void Start () 
     {
@@ -65,7 +76,10 @@ public class Gem : MonoBehaviour
 
     public void OnMouseDown()
     {
-        ToggleSelector();
-        GameObject.Find("Board").GetComponent<Board>().SwapGems(this);
+        if (!GameObject.Find("Board").GetComponent<Board>().IsSwapping)
+        {
+            ToggleSelector();
+            GameObject.Find("Board").GetComponent<Board>().SwapGems(this);
+        }
     }
 }

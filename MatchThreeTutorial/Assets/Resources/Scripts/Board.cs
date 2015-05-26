@@ -19,6 +19,7 @@ public class Board : MonoBehaviour
     public Gem Gem2;
     public float StartTime;
     public float SwapRate = 2;
+    public int AmountToMatch = 3;
 
     // Use this for initialization
 	void Start () 
@@ -48,15 +49,55 @@ public class Board : MonoBehaviour
 	        {
 	            Gem1.transform.position = Gem1End;
                 Gem2.transform.position = Gem2End;
-	            IsSwapping = false;
+                Gem1.ToggleSelector();
+                Gem2.ToggleSelector();
+	            LastGem = null;
+
+                IsSwapping = false;
+                TogglePhysics(false);
+                CheckMatch();
 	        }
 	    }
 	}
 
+    public void CheckMatch()
+    {
+        List<Gem> gem1List = new List<Gem>();
+        List<Gem> gem2List = new List<Gem>();
+
+    }
+
+    public void ConstructMatchList(string color, Gem gem, int XCoord, int YCoord, ref List<Gem> MatchList)
+    {
+        if (gem == null)
+        {
+            return;
+        }
+        else if (gem._color !=color)
+        {
+            return;
+        }
+        else if (MatchList.Contains(gem))
+        {
+            return;
+        }
+        else
+        {
+            MatchList.Add(gem);
+            if (XCoord == gem.Xcoord || YCoord == gem.Ycoord)
+            {
+                foreach (Gem g in gem.Neighbors)
+                {
+                    ConstructMatchList(color, g, XCoord, YCoord, ref MatchList);
+                }
+            }
+        }
+    }
+
     public void MoveGem(Gem gemToMove, Vector3 toPos, Vector3 fromPos)
     {
-        Vector3 center = (fromPos - toPos) *.5f;
-        center -= new Vector3(0,0,1f);
+        Vector3 center = (fromPos + toPos) *.5f;
+        center -= new Vector3(0,0,.1f);
         Vector3 riseRelCenter = fromPos - center;
         Vector3 setRelCenter = toPos - center;
         float fracComplete = (Time.time - StartTime)/SwapRate;
@@ -66,13 +107,21 @@ public class Board : MonoBehaviour
 
     public void MoveNegGem(Gem gemToMove, Vector3 toPos, Vector3 fromPos)
     {
-        Vector3 center = (fromPos - toPos) * .5f;
-        center -= new Vector3(0, 0, -1f);
+        Vector3 center = (fromPos + toPos) * .5f;
+        center -= new Vector3(0, 0, -.1f);
         Vector3 riseRelCenter = fromPos - center;
         Vector3 setRelCenter = toPos - center;
         float fracComplete = (Time.time - StartTime) / SwapRate;
         gemToMove.transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, fracComplete);
         gemToMove.transform.position += center;
+    }
+
+    public void TogglePhysics(bool isOn)
+    {
+        for (int i = 0; i < gems.Count; i++)
+        {
+            gems[i].GetComponent<Rigidbody>().isKinematic = isOn;
+        }
     }
 
     public void SwapGems(Gem currentGem)
@@ -91,6 +140,8 @@ public class Board : MonoBehaviour
                 Gem2End = LastGem.transform.position;
 
                 StartTime = Time.time;
+
+                TogglePhysics(true);
 
                 Gem1 = LastGem;
                 Gem2 = currentGem;

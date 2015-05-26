@@ -14,6 +14,6 @@ public class Feeler : MonoBehaviour
     void OnTriggerExit(Collider c)
     {
         if (c.tag == "Gem")
-            Owner.AddNeighbor(c.GetComponent<Gem>());
+            Owner.RemoveNeighbor(c.GetComponent<Gem>());
     }
 }
