@@ -75,7 +75,30 @@ public class Board : MonoBehaviour
                 CheckMatch();
 	        }
 	    }
+	    else if (!DetermineBoardState())
+	    {
+	        for (int i = 0; i < gems.Count; i++)
+	        {
+	            CheckForNearbyMatches(gems[i]);
+	        }
+	    }
 	}
+
+    public bool DetermineBoardState()
+    {
+        for (int i = 0; i < gems.Count; i++)
+        {
+            if (gems[i].transform.localPosition.y > 4)
+            {
+                return true;
+            }
+            else if (gems[i].GetComponent<Rigidbody>().velocity.y > .1f)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public void CheckMatch()
     {
@@ -87,6 +110,13 @@ public class Board : MonoBehaviour
         ConstructMatchList(Gem2._color, Gem2, Gem2.Xcoord, Gem2.Ycoord, ref gem2List);
         FixMatchList(Gem2, gem2List);
         
+    }
+
+    public void CheckForNearbyMatches(Gem g)
+    {
+        List<Gem> gemlList = new List<Gem>();
+        ConstructMatchList(g._color, g, g.Xcoord, g.Ycoord, ref gemlList);
+        FixMatchList(g, gemlList);
     }
 
     public void ConstructMatchList(string color, Gem gem, int XCoord, int YCoord, ref List<Gem> MatchList)
