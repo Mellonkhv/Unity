@@ -51,7 +51,7 @@ public class Gem : MonoBehaviour
         Debug.Log(_color);
         Material m = Resources.Load("Materials/" + _color) as Material;
         Sphere.GetComponent<Renderer>().material = m;
-
+        isMatched = false;
     }
 
     public void AddNeighbor(Gem g)

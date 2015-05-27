@@ -20,6 +20,7 @@ public class Board : MonoBehaviour
     public float StartTime;
     public float SwapRate = 2;
     public int AmountToMatch = 3;
+    public bool IsMatched = false;
 
     // Use this for initialization
 	void Start () 
@@ -40,7 +41,23 @@ public class Board : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-	    if (IsSwapping)
+	    if (IsMatched)
+	    {
+	        for (int i = 0; i < gems.Count; i++)
+	        {
+	            if (gems[i].isMatched)
+	            {
+	                gems[i].CreateGem();
+	                gems[i].transform.position = new Vector3(
+                        gems[i].transform.position.x, 
+                        gems[i].transform.position.y + 6,
+	                    gems[i].transform.position.z);
+	            }
+	        }
+
+	        IsMatched = false;
+	    }
+	    else if (IsSwapping)
 	    {
 	        MoveGem(Gem1, Gem1End,Gem1Start);
             MoveNegGem(Gem2, Gem2End, Gem2Start);
@@ -65,6 +82,11 @@ public class Board : MonoBehaviour
         List<Gem> gem1List = new List<Gem>();
         List<Gem> gem2List = new List<Gem>();
 
+        ConstructMatchList(Gem1._color, Gem1, Gem1.Xcoord, Gem1.Ycoord, ref gem1List);
+        FixMatchList(Gem1, gem1List);
+        ConstructMatchList(Gem2._color, Gem2, Gem2.Xcoord, Gem2.Ycoord, ref gem2List);
+        FixMatchList(Gem2, gem2List);
+        
     }
 
     public void ConstructMatchList(string color, Gem gem, int XCoord, int YCoord, ref List<Gem> MatchList)
@@ -90,6 +112,41 @@ public class Board : MonoBehaviour
                 {
                     ConstructMatchList(color, g, XCoord, YCoord, ref MatchList);
                 }
+            }
+        }
+    }
+
+    public void FixMatchList(Gem gem, List<Gem> listToFix )
+    {
+        List<Gem> rows = new List<Gem>();
+        List<Gem> collumns = new List<Gem>();
+
+        for (int i = 0; i < listToFix.Count; i++)
+        {
+            if (gem.Xcoord == listToFix[i].Xcoord)
+            {
+                rows.Add(listToFix[i]);
+            }
+            if (gem.Ycoord == listToFix[i].Ycoord)
+            {
+                collumns.Add(listToFix[i]);
+            }
+        }
+
+        if (rows.Count >= AmountToMatch)
+        {
+            IsMatched = true;
+            for (int i = 0; i < rows.Count; i++)
+            {
+                rows[i].isMatched = true;
+            }
+        }
+        if (collumns.Count >= AmountToMatch)
+        {
+            IsMatched = true;
+            for (int i = 0; i < collumns.Count; i++)
+            {
+                collumns[i].isMatched = true;
             }
         }
     }
