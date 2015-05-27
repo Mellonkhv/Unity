@@ -6,8 +6,8 @@ using System.Runtime.Serialization;
 
 public class Gem : MonoBehaviour
 {
+    public GameObject GemHolder;
     public GameObject Sphere;
-    public GameObject Selector;
     private string[] _gemMats = {"Blue", "Green", "Grey", "Purple", "Red", "Yellow"};
     public string _color = "";
     public List<Gem> Neighbors = new List<Gem>();
@@ -39,18 +39,19 @@ public class Gem : MonoBehaviour
     public void ToggleSelector()
     {
         IsSelected = !IsSelected;
-        Selector.SetActive(IsSelected);
+        Sphere.transform.FindChild("Selector").gameObject.SetActive(IsSelected);
     }
 
     
 
     public void CreateGem()
     {
-        //Destroy(Sphere);
+        Destroy(Sphere);
         _color = _gemMats[Random.Range(0, _gemMats.Length)];
-        Debug.Log(_color);
-        Material m = Resources.Load("Materials/" + _color) as Material;
-        Sphere.GetComponent<Renderer>().material = m;
+        GameObject gemPrefab = Resources.Load("Prefabs/" + _color) as GameObject;
+        Sphere = (GameObject) Instantiate(gemPrefab, Vector3.zero, Quaternion.identity);
+        Sphere.transform.parent = GemHolder.transform;
+        Sphere.transform.localPosition = Vector3.zero;
         isMatched = false;
     }
 
