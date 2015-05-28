@@ -15,6 +15,7 @@ public class Board : MonoBehaviour
     public Vector3 Gem2Start;
     public Vector3 Gem2End;
     public bool IsSwapping = false;
+    public bool SwapBack = false;
     public Gem Gem1;
     public Gem Gem2;
     public float StartTime;
@@ -66,13 +67,21 @@ public class Board : MonoBehaviour
 	        {
 	            Gem1.transform.position = Gem1End;
                 Gem2.transform.position = Gem2End;
-                Gem1.ToggleSelector();
-                Gem2.ToggleSelector();
+                
 	            LastGem = null;
 
                 IsSwapping = false;
                 TogglePhysics(false);
-                CheckMatch();
+	            if (!SwapBack)
+	            {
+                    Gem1.ToggleSelector();
+                    Gem2.ToggleSelector();
+	                CheckMatch();
+	            }
+	            else
+	            {
+	                SwapBack = false;
+	            }
 	        }
 	    }
 	    else if (!DetermineBoardState())
@@ -81,8 +90,69 @@ public class Board : MonoBehaviour
 	        {
 	            CheckForNearbyMatches(gems[i]);
 	        }
-	    }
+
+            if (!DoesBoardContainMatches())
+            {
+                IsMatched = true;
+                for (int i = 0; i < gems.Count; i++)
+                {
+                    gems[i].isMatched = true;
+                }
+            }
+	    } 
 	}
+
+    public bool DoesBoardContainMatches()
+    {
+        TogglePhysics(true);
+        for (int i = 0; i < gems.Count; i++)
+        {
+            for (int j = 0; j < gems.Count; j++)
+            {
+                if (gems[i].IsNeighborWith(gems[j]))
+                {
+                    Gem g = gems[i];
+                    Gem f = gems[j];
+                    Vector3 GTemp = g.transform.position;
+                    Vector3 FTemp = f.transform.position;
+                    List<Gem> tempNeighbors = new List<Gem>(g.Neighbors);
+                    g.transform.position = FTemp;
+                    f.transform.position = GTemp;
+                    g.Neighbors = f.Neighbors;
+                    f.Neighbors = tempNeighbors;
+                    List<Gem> testListG = new List<Gem>();
+                    ConstructMatchList(g._color, g, g.Xcoord, g.Ycoord, ref testListG);
+                    if (TestMatchList(g,testListG))
+                    {
+                        g.transform.position = GTemp;
+                        f.transform.position = FTemp;
+                        f.Neighbors = g.Neighbors;
+                        g.Neighbors = tempNeighbors;
+                        TogglePhysics(false);
+                        return true;
+                    }
+                    List<Gem> testListF = new List<Gem>();
+                    ConstructMatchList(f._color, f, f.Xcoord, f.Ycoord, ref testListF);
+                    if (TestMatchList(f, testListF))
+                    {
+                        g.transform.position = GTemp;
+                        f.transform.position = FTemp;
+                        f.Neighbors = g.Neighbors;
+                        g.Neighbors = tempNeighbors;
+                        TogglePhysics(false);
+                        return true;
+                    }
+                    g.transform.position = GTemp;
+                    f.transform.position = FTemp;
+                    f.Neighbors = g.Neighbors;
+                    g.Neighbors = tempNeighbors;
+                    TogglePhysics(true);
+                }
+            }
+        }
+
+        return false;
+    }
 
     public bool DetermineBoardState()
     {
@@ -109,7 +179,25 @@ public class Board : MonoBehaviour
         FixMatchList(Gem1, gem1List);
         ConstructMatchList(Gem2._color, Gem2, Gem2.Xcoord, Gem2.Ycoord, ref gem2List);
         FixMatchList(Gem2, gem2List);
-        
+        if (!IsMatched)
+        {
+            SwapBack = true;
+            ResetGems();
+        }
+    }
+
+    public void ResetGems()
+    {
+        Gem1Start = Gem1.transform.position;
+        Gem2Start = Gem2.transform.position;
+        Gem1End = Gem2.transform.position;
+        Gem2End = Gem1.transform.position;
+
+        StartTime = Time.time;
+
+        TogglePhysics(true);
+
+        IsSwapping = true;
     }
 
     public void CheckForNearbyMatches(Gem g)
@@ -144,6 +232,34 @@ public class Board : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool TestMatchList(Gem gem, List<Gem> listToFix)
+    {
+        List<Gem> rows = new List<Gem>();
+        List<Gem> collumns = new List<Gem>();
+
+        for (int i = 0; i < listToFix.Count; i++)
+        {
+            if (gem.Xcoord == listToFix[i].Xcoord)
+            {
+                rows.Add(listToFix[i]);
+            }
+            if (gem.Ycoord == listToFix[i].Ycoord)
+            {
+                collumns.Add(listToFix[i]);
+            }
+        }
+
+        if (rows.Count >= AmountToMatch)
+        {
+            return true;
+        }
+        if (collumns.Count >= AmountToMatch)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void FixMatchList(Gem gem, List<Gem> listToFix )
