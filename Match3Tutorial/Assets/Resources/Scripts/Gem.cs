@@ -1,75 +1,69 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 
-public class Gem : MonoBehaviour 
+public class Gem : MonoBehaviour
 {
-    public GameObject gemHolder;
-    public GameObject sphere;
-    public GameObject selector;
-
-    string[] gemMats = { "Blue", "Green", "Grey", "Purple","Red", "Yellow"};
-    public string color = "";
-
+    public GameObject GemHolder;
+    public GameObject Sphere;
+    private string[] _gemMats = { "Blue", "Green", "Grey", "Purple", "Red", "Yellow" };
+    public string _color = "";
     public List<Gem> Neighbors = new List<Gem>();
-    
-    public bool isSelected = false;
+    public bool IsSelected = false;
     public bool isMatched = false;
 
-    public int XCoord
+    public int Xcoord
     {
-        get
-        {
-            return Mathf.RoundToInt(transform.localPosition.x);
-        }
+        get { return Mathf.RoundToInt(transform.localPosition.x); }
     }
 
-    public int YCoord
+    public int Ycoord
     {
-        get
-        {
-            return Mathf.RoundToInt(transform.localPosition.y);
-        }
+        get { return Mathf.RoundToInt(transform.localPosition.y); }
     }
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start()
     {
         CreateGem();
-	}
-	
-	// Update is called once per frame
-	void Update () 
+    }
+
+    // Update is called once per frame
+    void Update()
     {
 
     }
 
     public void ToggleSelector()
     {
-        isSelected = !isSelected;
-        sphere.transform.FindChild("Selector").gameObject.SetActive(isSelected);
+        IsSelected = !IsSelected;
+        Sphere.transform.FindChild("Selector").gameObject.SetActive(IsSelected);
     }
+
+
 
     public void CreateGem()
     {
-        Destroy(sphere);
-        color = gemMats[Random.Range(0, gemMats.Length)];
-        GameObject gemPrefab = Resources.Load("Prefabs/" + color) as GameObject;
-        sphere = (GameObject)Instantiate(gemPrefab, Vector3.zero, Quaternion.identity);
-        sphere.transform.parent = gemHolder.transform;
-        sphere.transform.localPosition = Vector3.zero;
+        Destroy(Sphere);
+        _color = _gemMats[Random.Range(0, _gemMats.Length)];
+        GameObject gemPrefab = Resources.Load("Prefabs/" + _color) as GameObject;
+        Sphere = (GameObject)Instantiate(gemPrefab, Vector3.zero, Quaternion.identity);
+        Sphere.transform.parent = GemHolder.transform;
+        Sphere.transform.localPosition = Vector3.zero;
         isMatched = false;
     }
 
     public void AddNeighbor(Gem g)
     {
-        if(!Neighbors.Contains(g))
+        if (!Neighbors.Contains(g))
             Neighbors.Add(g);
     }
 
     public bool IsNeighborWith(Gem g)
     {
-        if(Neighbors.Contains(g))
+        if (Neighbors.Contains(g))
         {
             return true;
         }
@@ -81,9 +75,13 @@ public class Gem : MonoBehaviour
         Neighbors.Remove(g);
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
-        if (!GameObject.Find("Board").GetComponent<Board>().isSwappin)
+        if (GameObject.Find("Board").GetComponent<Board>().DetermineBoardState())
+        {
+            return;
+        }
+        if (!GameObject.Find("Board").GetComponent<Board>().IsSwapping)
         {
             ToggleSelector();
             GameObject.Find("Board").GetComponent<Board>().SwapGems(this);

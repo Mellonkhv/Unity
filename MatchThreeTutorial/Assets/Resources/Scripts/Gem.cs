@@ -77,6 +77,10 @@ public class Gem : MonoBehaviour
 
     public void OnMouseDown()
     {
+        if (GameObject.Find("Board").GetComponent<Board>().DetermineBoardState())
+        {
+            return;
+        }
         if (!GameObject.Find("Board").GetComponent<Board>().IsSwapping)
         {
             ToggleSelector();
