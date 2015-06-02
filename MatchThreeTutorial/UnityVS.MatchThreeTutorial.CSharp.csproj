@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Assets\Resources\Scripts\Board.cs" />
     <Compile Include="Assets\Resources\Scripts\Feeler.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameUI.cs" />
     <Compile Include="Assets\Resources\Scripts\Gem.cs" />
     <Compile Include="Assets\Resources\Scripts\UI.cs" />
   </ItemGroup>

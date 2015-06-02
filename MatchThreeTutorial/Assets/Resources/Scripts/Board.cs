@@ -281,6 +281,7 @@ public class Board : MonoBehaviour
 
         if (rows.Count >= AmountToMatch)
         {
+            GameObject.Find("Game").GetComponent<GameUI>().AddScore(1);
             IsMatched = true;
             for (int i = 0; i < rows.Count; i++)
             {
@@ -289,6 +290,7 @@ public class Board : MonoBehaviour
         }
         if (collumns.Count >= AmountToMatch)
         {
+            GameObject.Find("Game").GetComponent<GameUI>().AddScore(1);
             IsMatched = true;
             for (int i = 0; i < collumns.Count; i++)
             {
