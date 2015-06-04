@@ -9,7 +9,7 @@ public class GameMaster : MonoBehaviour {
     public float spawnDelay = 3.5f;
     public Transform spawnPrefab;
 
-    void Start()
+    void Awake()
     {
         if (gm == null)
         {

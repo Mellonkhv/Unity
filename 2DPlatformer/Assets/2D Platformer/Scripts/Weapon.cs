@@ -12,7 +12,12 @@ public class Weapon : MonoBehaviour {
     public Transform MuzzleFlashPrefab;
     float timeToSpawnEffect = 0;
     public float effectSpawnRate = 10;
-    
+
+    // Для камеротресения
+    public float camShakeAmt = 0.04f;
+    public float camShakeLength = 0.1f;
+    private CameraShake camShake;
+
     float timeToFire = 0;
     Transform firePoint;
 
@@ -27,6 +32,13 @@ public class Weapon : MonoBehaviour {
             Debug.LogError("Нет Точки огня? Совсем дурак?!");
         }
 	}
+
+    void Start()
+    {
+        camShake = GameMaster.gm.GetComponent<CameraShake>();
+        if(camShake == null)
+            Debug.LogError("Ненайден скрипт CameraShake в объекте GM.");
+    }
 	
 	// Update is called once per frame
 	void Update () 
@@ -110,5 +122,8 @@ public class Weapon : MonoBehaviour {
         float size = Random.Range (0.6f, 0.9f);
         clone.localScale = new Vector3(size, size, size);
         Destroy (clone.gameObject, 0.02f);
+
+        // Трясти камеру
+        camShake.Shake(camShakeAmt, camShakeLength);
     }
 }
