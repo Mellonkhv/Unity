@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public float JumpPower = 150f;
 
     public bool Grounded;
+    public bool CanDoubleJump;
 
     private Rigidbody2D _rb2D;
     private Animator _anim;
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour
 	void Update () 
     {
 	    _anim.SetBool("Grounded", Grounded);
-        _anim.SetFloat("Speed", Mathf.Abs(Input.GetAxis("Horizontal")));
+        _anim.SetFloat("Speed", Mathf.Abs(_rb2D.velocity.x));
 
 	    if (Input.GetAxis("Horizontal") < -0.01f)
 	    {
@@ -35,15 +36,39 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
         }
 
-	    if (Input.GetButtonDown("Jump") && Grounded)
+	    if (Input.GetButtonDown("Jump"))
 	    {
-	        _rb2D.AddForce(Vector2.up * JumpPower);
+	        if (Grounded)
+	        {
+	            _rb2D.AddForce(Vector2.up * JumpPower);
+	            CanDoubleJump = true;
+	        }
+	        else
+	        {
+	            if (CanDoubleJump)
+	            {
+	                CanDoubleJump = false;
+                    _rb2D.velocity = new Vector2(_rb2D.velocity.x, 0);
+                    _rb2D.AddForce(Vector2.up * JumpPower / 1.75f);
+	            }
+	        }
 	    }
 	}
 
     void FixedUpdate()
     {
+        Vector3 easeVelocity = _rb2D.velocity;
+        easeVelocity.y = _rb2D.velocity.y;
+        easeVelocity.z = 0.0f;
+        easeVelocity.x *= 0.75f;
+
         float h = Input.GetAxis("Horizontal");
+
+        // Подделка трения / ослобление скорости по оси Х нашего игрока
+        if (Grounded)
+        {
+            _rb2D.velocity = easeVelocity;
+        }
 
         // Двигаем игрока
         _rb2D.AddForce((Vector2.right * Speed) * h);
