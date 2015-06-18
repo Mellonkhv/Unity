@@ -10,8 +10,8 @@ public class Player : MonoBehaviour
     public bool Grounded;
     public bool CanDoubleJump;
 
-    public int curHealth;
-    public int maxHealth = 100;
+    public int CurHealth;
+    public int MaxHealth = 5;
 
     private Rigidbody2D _rb2D;
     private Animator _anim;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 	    _rb2D = gameObject.GetComponent<Rigidbody2D>();
 	    _anim = gameObject.GetComponent<Animator>();
 
-	    curHealth = maxHealth;
+	    CurHealth = MaxHealth;
 	}
 	
 	// Update is called once per frame
@@ -59,12 +59,12 @@ public class Player : MonoBehaviour
 	        }
 	    }
 
-        if (curHealth > maxHealth)
+        if (CurHealth > MaxHealth)
         {
-            curHealth = maxHealth;
+            CurHealth = MaxHealth;
         }
 
-	    if (curHealth <= 0)
+	    if (CurHealth <= 0)
 	    {
 	        Die();
 	    }
