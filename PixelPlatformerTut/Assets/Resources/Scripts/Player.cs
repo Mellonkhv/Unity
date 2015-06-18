@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     public bool Grounded;
     public bool CanDoubleJump;
 
+    public int curHealth;
+    public int maxHealth = 100;
+
     private Rigidbody2D _rb2D;
     private Animator _anim;
 
@@ -18,6 +21,8 @@ public class Player : MonoBehaviour
 	{
 	    _rb2D = gameObject.GetComponent<Rigidbody2D>();
 	    _anim = gameObject.GetComponent<Animator>();
+
+	    curHealth = maxHealth;
 	}
 	
 	// Update is called once per frame
@@ -53,6 +58,16 @@ public class Player : MonoBehaviour
 	            }
 	        }
 	    }
+
+        if (curHealth > maxHealth)
+        {
+            curHealth = maxHealth;
+        }
+
+	    if (curHealth <= 0)
+	    {
+	        Die();
+	    }
 	}
 
     void FixedUpdate()
@@ -83,5 +98,10 @@ public class Player : MonoBehaviour
         {
             _rb2D.velocity = new Vector2(-MaxSpeed, _rb2D.velocity.y);
         }
+    }
+
+    void Die()
+    {
+        Application.LoadLevel(Application.loadedLevel);
     }
 }
