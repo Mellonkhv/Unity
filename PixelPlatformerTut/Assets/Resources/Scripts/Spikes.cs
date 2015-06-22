@@ -18,6 +18,8 @@ public class Spikes : MonoBehaviour
         if (col.CompareTag("Player"))
         {
             player.Damege(3);
+
+            StartCoroutine(player.Knockback(0.02f, 350, player.transform.position));
         }
     }
 }

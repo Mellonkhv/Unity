@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
 
 	    if (CurHealth <= 0)
 	    {
+	        CurHealth = 0;
 	        Die();
 	    }
 	}
@@ -108,5 +109,19 @@ public class Player : MonoBehaviour
     public void Damege(int dmg)
     {
         CurHealth -= dmg;
+        gameObject.GetComponent<Animation>().Play("Player_RedFlash");
+    }
+
+    public IEnumerator Knockback(float knockDur, float knockBackPwr, Vector3 knockBackDir)
+    {
+        float timer = 0;
+
+        while (knockDur > timer)
+        {
+            timer += Time.deltaTime;
+
+            _rb2D.AddForce(new Vector3(knockBackDir.x * -100, knockBackDir.y * knockBackPwr, transform.position.z));
+        }
+        yield return 0;
     }
 }
