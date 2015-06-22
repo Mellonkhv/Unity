@@ -104,4 +104,9 @@ public class Player : MonoBehaviour
     {
         Application.LoadLevel(Application.loadedLevel);
     }
+
+    public void Damege(int dmg)
+    {
+        CurHealth -= dmg;
+    }
 }
