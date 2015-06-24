@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: edc36e6ba4db137409ea1850ff383c00
-timeCreated: 1434605654
+timeCreated: 1435111293
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -58,9 +58,9 @@ TextureImporter:
     - name: Hearts_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 77
-        width: 83
+        width: 87
         height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -68,9 +68,9 @@ TextureImporter:
     - name: Hearts_1
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 62
-        width: 83
+        width: 87
         height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -78,9 +78,9 @@ TextureImporter:
     - name: Hearts_2
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 47
-        width: 83
+        width: 87
         height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -88,9 +88,9 @@ TextureImporter:
     - name: Hearts_3
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 32
-        width: 83
+        width: 87
         height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -98,9 +98,9 @@ TextureImporter:
     - name: Hearts_4
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 17
-        width: 83
+        width: 87
         height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -108,9 +108,9 @@ TextureImporter:
     - name: Hearts_5
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 2
-        width: 83
+        width: 87
         height: 13
       alignment: 0
       pivot: {x: .5, y: .5}
