@@ -63,12 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Resources\Scripts\Attack_Cone.cs" />
+    <Compile Include="Assets\Resources\Scripts\Bullet.cs" />
     <Compile Include="Assets\Resources\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Resources\Scripts\GroundCheck.cs" />
     <Compile Include="Assets\Resources\Scripts\HUD.cs" />
     <Compile Include="Assets\Resources\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\Resources\Scripts\Player.cs" />
     <Compile Include="Assets\Resources\Scripts\Spikes.cs" />
+    <Compile Include="Assets\Resources\Scripts\TurretAI.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
