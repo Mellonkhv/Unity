@@ -1,0 +1,17 @@
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEditor.dll
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.dll
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEngine.dll
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEngine.xml
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEditor.xml
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.xml
+D:\GitWIP\Unity\PixelPlatformerTut\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
+D:\GitWIP\Unity\PixelPlatformerTut\obj\Debug\UnityVS.PixelPlatformerTut.CSharp.csprojResolveAssemblyReference.cache
+D:\GitWIP\Unity\PixelPlatformerTut\obj\Debug\Assembly-CSharp.dll
+D:\GitWIP\Unity\PixelPlatformerTut\obj\Debug\Assembly-CSharp.pdb
