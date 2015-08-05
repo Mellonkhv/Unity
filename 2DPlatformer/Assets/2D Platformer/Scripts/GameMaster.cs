@@ -9,6 +9,8 @@ public class GameMaster : MonoBehaviour {
     public float spawnDelay = 3.5f;
     public Transform spawnPrefab;
 
+    public CameraShake cameraShake;
+
     void Awake()
     {
         if (gm == null)
@@ -17,7 +19,15 @@ public class GameMaster : MonoBehaviour {
         }
     }
 
-    public IEnumerator RespawnPlayer ()
+    void Start()
+    {
+        if (cameraShake == null)
+        {
+            Debug.LogError("Нет подключенной камеры для встряски");
+        }
+    }
+
+    public IEnumerator _RespawnPlayer ()
     {
         GetComponent<AudioSource>().Play();
         yield return new WaitForSeconds(spawnDelay);
@@ -30,11 +40,19 @@ public class GameMaster : MonoBehaviour {
 	public static void KillPlayer (Player player)
     {
         Destroy(player.gameObject);
-        gm.StartCoroutine(gm.RespawnPlayer());
+        gm.StartCoroutine(gm._RespawnPlayer());
     }
 
     public static void KillEnemy (Enemy enemy)
     {
+        gm._KillEnemy(enemy);
+    }
+
+    public void _KillEnemy(Enemy enemy)
+    {
+        GameObject clone = Instantiate(enemy.deathParticles, enemy.transform.position, Quaternion.identity) as GameObject;
+        Destroy(clone, 5f);
+        cameraShake.Shake(enemy.shakeAmt, enemy.shakeLength);
         Destroy(enemy.gameObject);
     }
 }

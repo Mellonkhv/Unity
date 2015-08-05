@@ -74,7 +74,7 @@ public class Weapon : MonoBehaviour {
             if (enemy != null)
             {
                 enemy.DamageEnemy(Damage);
-                Debug.Log("Мы попали " + hit.collider.name + " и нанесли " + Damage + " урона.");
+                //Debug.Log("Мы попали " + hit.collider.name + " и нанесли " + Damage + " урона.");
             }
         }
         if (Time.time >= timeToSpawnEffect)
