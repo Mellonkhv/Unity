@@ -67,6 +67,7 @@
     <Compile Include="Assets\Resources\Scripts\Attack_Cone.cs" />
     <Compile Include="Assets\Resources\Scripts\Bullet.cs" />
     <Compile Include="Assets\Resources\Scripts\CameraFollow.cs" />
+    <Compile Include="Assets\Resources\Scripts\GameMaster.cs" />
     <Compile Include="Assets\Resources\Scripts\GroundCheck.cs" />
     <Compile Include="Assets\Resources\Scripts\HUD.cs" />
     <Compile Include="Assets\Resources\Scripts\PauseMenu.cs" />

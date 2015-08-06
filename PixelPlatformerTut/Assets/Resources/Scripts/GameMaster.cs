@@ -1,0 +1,21 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class GameMaster : MonoBehaviour {
+
+    public int points;
+
+    public Text pointsText;
+
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () 
+    {
+        pointsText.text = ("Points: " + points);
+	}
+}

@@ -15,12 +15,14 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D _rb2D;
     private Animator _anim;
+    private GameMaster _gm;
 
 	// Use this for initialization
 	void Start ()
 	{
 	    _rb2D = gameObject.GetComponent<Rigidbody2D>();
 	    _anim = gameObject.GetComponent<Animator>();
+	    _gm = GameObject.FindGameObjectWithTag("GameMaster").GetComponent<GameMaster>();
 
 	    CurHealth = MaxHealth;
 	}
@@ -123,5 +125,14 @@ public class Player : MonoBehaviour
             _rb2D.AddForce(new Vector3(knockBackDir.x * -100, knockBackDir.y * knockBackPwr, transform.position.z));
         }
         yield return 0;
+    }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.CompareTag("Coin"))
+        {
+            Destroy(col.gameObject);
+            _gm.points += 1;
+        }
     }
 }
