@@ -6,16 +6,12 @@ public class GameMaster : MonoBehaviour {
 
     public int points;
 
-    public Text pointsText;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
+    public Text PointsText;
+    public Text InpuText;
 	
 	// Update is called once per frame
 	void Update () 
     {
-        pointsText.text = ("Points: " + points);
+        PointsText.text = ("Points: " + points);
 	}
 }

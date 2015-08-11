@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
     public bool Grounded;
     public bool CanDoubleJump;
+    public bool WallSliding;
+    public bool facingRight = true;
 
     public int CurHealth;
     public int MaxHealth = 5;
@@ -16,6 +18,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rb2D;
     private Animator _anim;
     private GameMaster _gm;
+    public Transform wallCheckPoint;
+    public bool wallCheck;
+    public LayerMask WallLayerMask;
 
 	// Use this for initialization
 	void Start ()
@@ -33,17 +38,19 @@ public class Player : MonoBehaviour
 	    _anim.SetBool("Grounded", Grounded);
         _anim.SetFloat("Speed", Mathf.Abs(_rb2D.velocity.x));
 
-	    if (Input.GetAxis("Horizontal") < -0.01f)
+	    if (Input.GetAxis("Horizontal") < -0.1f)
 	    {
 	        transform.localScale = new Vector3(-1, 1, 1);
+	        facingRight = false;
 	    }
         
-        else if (Input.GetAxis("Horizontal") > 0.01f)
+        else if (Input.GetAxis("Horizontal") > 0.1f)
         {
             transform.localScale = new Vector3(1, 1, 1);
+            facingRight = true;
         }
 
-	    if (Input.GetButtonDown("Jump"))
+	    if (Input.GetButtonDown("Jump") && !WallSliding)
 	    {
 	        if (Grounded)
 	        {
@@ -71,7 +78,45 @@ public class Player : MonoBehaviour
 	        CurHealth = 0;
 	        Die();
 	    }
+
+	    if (!Grounded)
+	    {
+	        wallCheck = Physics2D.OverlapCircle(wallCheckPoint.position, 0.01f, WallLayerMask);
+
+	        if (facingRight && Input.GetAxis("Horizontal") > 0.1f || !facingRight && Input.GetAxis("Horizontal") < -0.1f)
+	        {
+	            if (wallCheck)
+	            {
+	                HandleWallSliding();
+	            }
+	        }
+	    }
+
+	    if (wallCheck == false || Grounded)
+	    {
+	        WallSliding = false;
+	    }
 	}
+
+    void HandleWallSliding()
+    {
+        _rb2D.velocity = new Vector2(_rb2D.velocity.x, -0.7f);
+
+        WallSliding = true;
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (facingRight)
+            {
+                _rb2D.AddForce(new Vector2(-1.5f, 2) * JumpPower);
+            }
+            else
+            {
+                _rb2D.AddForce(new Vector2(1.5f, 2) * JumpPower);
+            }
+        }
+
+    }
 
     void FixedUpdate()
     {
@@ -89,7 +134,14 @@ public class Player : MonoBehaviour
         }
 
         // Двигаем игрока
-        _rb2D.AddForce((Vector2.right * Speed) * h);
+        if (Grounded)
+        {
+            _rb2D.AddForce((Vector2.right * Speed) * h);
+        }
+        else
+        {
+            _rb2D.AddForce((Vector2.right * Speed / 2) * h);
+        }
 
         // Предел скорости игрока
         if (_rb2D.velocity.x > MaxSpeed)
