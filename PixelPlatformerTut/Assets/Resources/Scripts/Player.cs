@@ -157,6 +157,18 @@ public class Player : MonoBehaviour
 
     void Die()
     {
+        if (PlayerPrefs.HasKey("HightScore"))
+        {
+            if (PlayerPrefs.GetInt("HightScore") < _gm.Score)
+            {
+                PlayerPrefs.SetInt("HightScore", _gm.Score);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("HightScore", _gm.Score);
+        }
+
         Application.LoadLevel(Application.loadedLevel);
     }
 
@@ -184,7 +196,7 @@ public class Player : MonoBehaviour
         if (col.CompareTag("Coin"))
         {
             Destroy(col.gameObject);
-            _gm.points += 1;
+            _gm.Score += 1;
         }
     }
 }

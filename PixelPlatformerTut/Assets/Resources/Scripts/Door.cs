@@ -20,6 +20,7 @@ public class Door : MonoBehaviour {
             _gm.InpuText.text = ("[E] для Входа");
             if (Input.GetKeyDown("e"))
             {
+                SaveScore();
                 Application.LoadLevel(LevelToLoad);
             }
         }
@@ -31,6 +32,7 @@ public class Door : MonoBehaviour {
         {
             if (Input.GetKeyDown("e"))
             {
+                SaveScore();
                 Application.LoadLevel(LevelToLoad);
             }
         }
@@ -43,5 +45,10 @@ public class Door : MonoBehaviour {
 
             _gm.InpuText.text = ("");
         }
+    }
+
+    void SaveScore()
+    {
+        PlayerPrefs.SetInt("Score", _gm.Score);
     }
 }

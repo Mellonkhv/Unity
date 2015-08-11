@@ -47,7 +47,7 @@ public class TurretAI : MonoBehaviour
 	    if (CurHealth <= 0)
 	    {
 	        Destroy(gameObject);
-	        _gm.points += 10;
+	        _gm.Score += 10;
 	    }
     }
 

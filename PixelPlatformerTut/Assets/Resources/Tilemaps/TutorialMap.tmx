@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="100" height="20" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="Tileset" tilewidth="16" tileheight="16" tilecount="36">
+  <image source="../Sprites/yzfCODk.png" width="96" height="96"/>
+  <tile id="0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.03125" y="15.9688">
+     <polyline points="0,0 15.9375,-15.0625 16,0 0,0.03125"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="1">
+   <objectgroup draworder="index">
+    <object id="0" x="-0.3125" y="0.9375" width="16.6875" height="15.0312"/>
+   </objectgroup>
+  </tile>
+  <tile id="6">
+   <objectgroup draworder="index">
+    <object id="0" x="1.96875" y="0" width="14.0312" height="15.9688"/>
+   </objectgroup>
+  </tile>
+  <tile id="8">
+   <objectgroup draworder="index">
+    <object id="0" x="0.03125" y="0.03125" width="13.9375" height="15.9688"/>
+   </objectgroup>
+  </tile>
+  <tile id="15">
+   <objectgroup draworder="index">
+    <object id="0" x="0.03125" y="16">
+     <polyline points="0,0 16,-15.0312 15.9688,-0.03125 0.09375,-0.03125"/>
+    </object>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <layer name="Слой тайлов 1" width="100" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt0TEKgDAUBNHVRu2s9P43NSA2WigB2Ynug20D+SPVGU+bKt8hG3T95zGa9GBJD5b0YEkPlvRgSQ+W9GBJD5b0YEkPlvRgSQ+WL/eYy/qyRenh1Om+Qys9Vu1/aXlPOrTS42+jcd/DPRr3Pdyjcd/Dvbds/KgO4Q==
+  </data>
+ </layer>
+</map>
