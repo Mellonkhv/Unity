@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="grass" tilewidth="32" tileheight="32" tilecount="18">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/grass.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="19" name="RED" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/RED.png" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index">
+    <object id="0" x="0" y="0" width="31.9375" height="32.0625"/>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <tileset firstgid="20" name="rock" tilewidth="32" tileheight="32" tilecount="2">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/rock.png" width="64" height="32"/>
+ </tileset>
+ <tileset firstgid="22" name="treetop" tilewidth="32" tileheight="32" tilecount="42">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/treetop.png" width="192" height="224"/>
+ </tileset>
+ <tileset firstgid="64" name="trunk" tilewidth="32" tileheight="32" tilecount="18">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/trunk.png" width="192" height="96"/>
+ </tileset>
+ <tileset firstgid="82" name="dirt" tilewidth="32" tileheight="32" tilecount="18">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/dirt.png" width="96" height="192"/>
+  <terraintypes>
+   <terrain name="dirt" tile="-1"/>
+  </terraintypes>
+  <tile id="1" terrain="0,0,0,"/>
+  <tile id="2" terrain="0,0,,0"/>
+  <tile id="4" terrain="0,,0,0"/>
+  <tile id="5" terrain=",0,0,0"/>
+  <tile id="6" terrain=",,,0"/>
+  <tile id="7" terrain=",,0,0"/>
+  <tile id="8" terrain=",,0,"/>
+  <tile id="9" terrain=",0,,0"/>
+  <tile id="10" terrain="0,0,0,0"/>
+  <tile id="11" terrain="0,,0,"/>
+  <tile id="12" terrain=",0,,"/>
+  <tile id="13" terrain="0,0,,"/>
+  <tile id="14" terrain="0,,,"/>
+ </tileset>
+ <layer name="Grass" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzNVcsOgDAI474L2/9/rBdJsPIai4mHxsQhLR3CIKLxE6xiDN9Yxjfybt5gOGcjxzRiNJelYyoseupBDit3BUzvWi2PFjw7vlu6OPDxFF/lRY6O710PsY+8ezrhyM4lJtNS8ax6hyc5KhxW3d3eYcgRafW4qxzRP4t17NYSzS2vLzq14Gzw/JqFmKyPpCbPDz3bd3aF1z+ezu6s0Hsn0yg16v3R4URc3yIYNw==
+  </data>
+ </layer>
+ <layer name="Path" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztlNsKgDAMQ/ePyrxf/v8r3B4KoWRu04oIBvKknDSt6NyvN9QHD8SW7C54Jn6SLcZOYyWfsZvgTRmf+8KsM/5O3mfdfCZnSszO+E51agtzMCM1e0prQY7e01LBT+Ugg93hSkYU7kIYjF+7p1wGu/NVfhTuS75n7HCXL9JzW9xAS9/eugPm6P+CJf9rOgBHaTb/
+  </data>
+ </layer>
+ <layer name="Object" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJwTYWBgEKEDpiUYinbgMotSO0QpsHskAELhI4pED0R8ExN/2NTh00dM2kXXT6q7BioP4nIXuW4hJ6yIlSPFDnx6iVWHSy2xaYwSO/ABUuwnZIcIFjap/qNn2qU1BgAIqwfg
+  </data>
+ </layer>
+ <layer name="TreeBase" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzllEsKgDAMRHO0+v9Xvf9lnKWUajNm0+KDt5oEBhoq8g8crGBNZgw9HOBIZkyfFW7Qk5mlz1eYPiXTwBZ2ynkn/L1NcIaLcj72vqmeOzzg+ZCH+7H3ZXuGaPZTPVNY93PDSTl/2x3NPYkie8N6jxpyuqcLqDoZYw==
+  </data>
+ </layer>
+ <layer name="TreeTop" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzV1EcOAjEMheE5BQxl6L2Xobf734p/wSoySWxAwJO+xSjj2FKiJIk/JZRREdYKKCIN7BFKHQ00hbUqMtQi9vHN00UPfWGthTY6ET0081ijmeef867744v2vKSZxphg+qQmdF5uvTTTEiusI+d049ZLM+2wx8HYI6b+gituxh6v1mvy7ftn7T/AEKPHt+/+Wd+rGeZYRPxrfa9ybLBV1mlyxAnnD/b4pdwBf1oOjw==
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="20" opacity="0.43">
+  <data encoding="base64" compression="zlib">
+   eJwTZmBgEKYDpiWghh2E9BNrBz41wjjY2NTQMszoYcdwAKSEDzHph9Z24FJPTv4gRz210hW+sCLWbHLdMNjLK2LTES38gc8OavsHmx2E9JObx+gZ57TGANTlB20=
+  </data>
+ </layer>
+</map>

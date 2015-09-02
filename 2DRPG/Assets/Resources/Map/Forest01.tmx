@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="dirt" tilewidth="32" tileheight="32" tilecount="18">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/dirt.png" width="96" height="192"/>
+  <terraintypes>
+   <terrain name="Dirt" tile="-1"/>
+  </terraintypes>
+  <tile id="1" terrain="0,0,0,"/>
+  <tile id="2" terrain="0,0,,0"/>
+  <tile id="4" terrain="0,,0,0"/>
+  <tile id="5" terrain=",0,0,0"/>
+  <tile id="6" terrain=",,,0"/>
+  <tile id="7" terrain=",,0,0"/>
+  <tile id="8" terrain=",,0,"/>
+  <tile id="9" terrain=",0,,0"/>
+  <tile id="10" terrain="0,0,0,0"/>
+  <tile id="11" terrain="0,,0,"/>
+  <tile id="12" terrain=",0,,"/>
+  <tile id="13" terrain="0,0,,"/>
+  <tile id="14" terrain="0,,,"/>
+ </tileset>
+ <tileset firstgid="19" name="grass" tilewidth="32" tileheight="32" tilecount="18">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/grass.png" width="96" height="192"/>
+ </tileset>
+ <tileset firstgid="37" name="rock" tilewidth="32" tileheight="32" tilecount="2">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/rock.png" width="64" height="32"/>
+ </tileset>
+ <tileset firstgid="39" name="treetop" tilewidth="32" tileheight="32" tilecount="42">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/treetop.png" width="192" height="224"/>
+ </tileset>
+ <tileset firstgid="81" name="trunk" tilewidth="32" tileheight="32" tilecount="18">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/trunk.png" width="192" height="96"/>
+ </tileset>
+ <tileset firstgid="99" name="RED" tilewidth="32" tileheight="32" tilecount="1">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/RED.png" width="32" height="32"/>
+  <tile id="0">
+   <objectgroup draworder="index">
+    <object id="0" x="0.0625" y="0.0625" width="31.9375" height="32.125"/>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <tileset firstgid="100" name="house" tilewidth="32" tileheight="32" tilecount="63">
+  <image source="C:/Users/nvarfolomeev/Flash/WIP/Tiled/LPC Base Assets/tiles/house.png" width="288" height="224"/>
+ </tileset>
+ <layer name="Grass" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzdlcEOxCAIRP0RL8L/f+N2k5JM3iK1dbOHPUyoBmGYIvbWmh/oJ+zAkDUxxPrpP/MNOHIMyaV7JjGHQONwzyQ2eVvBjzUbYmmu1TorrXr75J7puRpb+Wqd1FBrelJDnFnldicHda36bgdVH/wTflFj9PDVnNgBe+3u3Xiq2a5+WS9r732jBt51zRV7V/8lmxl63uHjwIpWnEcxT8Mql1k/OSzjKycrbEd+a/lcDx6cnZzffCu4pgaVbiP5zs7NoNq9fV9/cjxa
+  </data>
+ </layer>
+ <layer name="Path" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztk8kKwCAMRKVi9+X//7YKFoapqUrTnhyYi0vGl6AxTbUavEfw9EHG7L2AnXJOYOgpI3hVzGCGUhbuL/YY9ySGHIt0z8W6uCcxPGXk3sXevPdoG9c6WDsy9fGs5NTdi5f7nKrPb5BUwu5e1A/CmTC7Nfe82vrMwDPGeUkzqmHQ/nd/ZnAvavvQpKsTjN4Gmg==
+  </data>
+ </layer>
+ <layer name="PathDecales" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy1k8ENACAIA10G9x/RlwkhIAVqEz8q14q6lq8dzHeF8qb7xAyW36se8Zlq6qP78eKgPl6Pxaxl9cj85H68s8iQmXmw+ZeJvmctJEflv0V33skW8X+pwvf2Zedk5L/1ttesHmsPhry3w8oZcStsm4/9L7uKcjDyHRUnCxY=
+  </data>
+ </layer>
+ <layer name="HouseBase" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFgxHUA3ETEDcDcQsQN9LAjolAPAkJT6aBHSlAnIqE02hgRy4Q5yHhfBrYUQbE5Ui4ggZ2jIJRMApGASUAAHNAC9Y=
+  </data>
+ </layer>
+ <layer name="HomeDeteles" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgF5IAsOthRTAc76AlmAPFMGpqfDsQLgXgRDe0ooKHZo2AUjIJRQAkAAE46BCk=
+  </data>
+ </layer>
+ <layer name="TreeBase" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy9VFsOgDAI44q+3zq9/yFsYvYzGbKJNunXXOkoQmSDAizB6kOdDuzB4WUNSWcBV3CL3G2UNZ50YhjBCZyZs6f3a705cAcP5kzyLXmzgiPem1X2EnIz+wtveqC9q+0Bp2fdv1BPO9+58PNtgdgec3TNdwxSTuH/lzsPUk7e38F8W9OVQZtYLwUpOybXj6P7jvFZhZqWO89nFWpyfiRI7z4B0x4p8Q==
+  </data>
+ </layer>
+ <layer name="TreeTop" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzFlEkOwjAMRXMbYME8Q5mnwgK4/2l4G0tRlCZ2W4kvvZUT2/myUzjndrB3eY1gDJNIbAFLWEViZ7jAVVHDz1MYeivhCa9IrANd6DXs7Q0f+EZifRjA0NibRVOYwdzQW+rtbSn19raUentOTTzQ3tV64OeT+dbe1Xrg55P5buJfrheZ7zoKd7zKb5nvKll23PfH8sdYdtz3x/LH1NnxWP2U1rCBreJsrr54HuY8wBFOxhoxiedhzhvc4aHMk5oR8dyaM9S//8IfHt0jsQ==
+  </data>
+ </layer>
+ <layer name="Collisions" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBheIBkN08J8YsSobQcx9uCTRw4PapiDLZyT0dSQYwchu4lVS4keSuwgJy0QE1aUpmlqpFFccU9suiLGfGLsp5X5+OwgJvxJcRu+cgRfOFPLDmoBbPmLFnbQskwfTgAAw4ccnw==
+  </data>
+ </layer>
+</map>
